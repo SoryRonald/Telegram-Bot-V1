@@ -1,18 +1,24 @@
-const TelegramBot = require('node-telegram-bot-api');
+module.exports = (bot) => {
+  const botAdmins = [7728855185]; // Liste des administrateurs du bot
 
-// Ton token et ID
-const bot = new TelegramBot('7546348683:AAECO7ClGJZfYbRnWMbSFUEs6DUuP5At9Hc', { polling: true });
-const ADMIN_ID = 7728855185;
+  bot.command('out', async (ctx) => {
+    try {
+      // Vérifier si la commande est utilisée dans un groupe
+      if (ctx.chat.type !== 'group' && ctx.chat.type !== 'supergroup') {
+        return ctx.reply('❌ Cette commande ne peut être utilisée que dans un groupe.');
+      }
 
-bot.onText(/\/out/, (msg) => {
-  const chatId = msg.chat.id;
-  const userId = msg.from.id;
+      // Vérifier si l'utilisateur est admin du bot
+      if (!botAdmins.includes(ctx.from.id)) {
+        return ctx.reply('❌ Seuls les administrateurs du bot peuvent utiliser cette commande.');
+      }
 
-  if (userId === admin_id) {
-    bot.sendMessage(chatId, "👋 Le bot quitte le groupe.").then(() => {
-      bot.leaveChat(chatId);
-    });
-  } else {
-    bot.sendMessage(chatId, "❌ Seul l'administrateur du bot peut utiliser cette commande.");
-  }
-});
+      // Quitter le groupe
+      await ctx.reply('👋 Au revoir, je quitte le groupe.');
+      await bot.telegram.leaveChat(ctx.chat.id);
+    } catch (error) {
+      console.error('Erreur dans la commande /out :', error.message);
+      ctx.reply('❌ Une erreur est survenue. Le bot n\'a pas pu quitter le groupe.');
+    }
+  });
+};
