@@ -1,22 +1,41 @@
-const TelegramBot = require('node-telegram-bot-api');
+const botAdmins = [7728855185];
+let allUsers = [];
 
-// Ton token et ID
-const bot = new TelegramBot('7546348683:AAECO7ClGJZfYbRnWMbSFUEs6DUuP5At9Hc', { polling: true });
-const admin_id= 7728855185;
+module.exports = (bot) => {
+  bot.use(async (ctx, next) => {
+    if (ctx.from) {
+      const user = {
+        id: ctx.from.id,
+        first_name: ctx.from.first_name,
+        username: ctx.from.username || "Pas de pseudo",
+      };
 
-const users = new Set();
+      if (!allUsers.some((u) => u.id === user.id)) {
+        allUsers.push(user);
+      }
+    }
+    await next();
+  });
 
-bot.on('message', (msg) => {
-  users.add(msg.from.username || `ID:${msg.from.id}`);
-});
+  bot.command('users', async (ctx) => {
+    try {
+      if (ctx.chat.type === 'group' || ctx.chat.type === 'supergroup') {
+        const members = await ctx.getChatMembersCount();
+        ctx.reply(`📋 Le groupe contient ${members} membres.`);
+      } else if (ctx.chat.type === 'private') {
+        if (!botAdmins.includes(ctx.from.id)) {
+          return ctx.reply("🚫 Seuls les administrateurs du bot peuvent utiliser cette commande en privé.");
+        }
 
-bot.onText(/\/users/, (msg) => {
-  const userId = msg.from.id;
-  const chatId = msg.chat.id;
+        const userList = allUsers.map((user) => {
+          return `👤 ${user.first_name} (${user.username})`;
+        });
 
-  if (userId === admin_id) {
-    bot.sendMessage(chatId, `👥 Utilisateurs ayant interagi avec le bot :\n${[...users].join('\n')}`);
-  } else {
-    bot.sendMessage(chatId, "❌ Cette commande est réservée à l'administrateur.");
-  }
-});
+        ctx.reply(`📋 Utilisateurs interagissant avec le bot :\n\n${userList.join('\n')}`);
+      }
+    } catch (error) {
+      console.error('Erreur dans la commande /users :', error.message);
+      ctx.reply('❌ Une erreur est survenue.');
+    }
+  });
+};
