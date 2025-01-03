@@ -1,8 +1,8 @@
 module.exports = (bot) => {
   bot.command('start', (ctx) => {
-    const userName = ctx.from.first_name; 
+    const userName = ctx.from.first_name;
 
-    const welcomeMessage = `👋 Bonjour ${userName} \n\nBienvenue chère utilisateur ou utilisatrice moi c'est Ronald Chatbot \n\n- /help consultez la liste de mes commandes \n\n veuillez contacter @RonaldAlexandreSory si le bot à un problème 🤗`;
+    const welcomeMessage = `Bonjour ${userName} \n\nEt bienvenue à vous créature supérieure. \nMoi c'est FadilChatbot. \nJe suis à votre service. \nVous voulez voir ce que je peux faire ?\n\nTapez /help 😇☺️ \n\nVeuillez s'il vous plaît contacter @fadil_uchiha si le bot rencontre des problèmes.`;
 
     ctx.reply(welcomeMessage);
   });
