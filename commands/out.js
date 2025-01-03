@@ -8,7 +8,7 @@ bot.onText(/\/out/, (msg) => {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
 
-  if (userId === ADMIN_ID) {
+  if (userId === admin_id) {
     bot.sendMessage(chatId, "👋 Le bot quitte le groupe.").then(() => {
       bot.leaveChat(chatId);
     });
