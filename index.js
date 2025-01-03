@@ -44,7 +44,7 @@ require('./commands/spotify')(bot)
 require('./commands/lyrics')(bot)
 require('./commands/video')(bot)
 require('./commands/join')(bot)
-require('./commands/notificatio'')(bot)
+require('./commands/notification')(bot)
 
 
 bot.on('text', async (ctx) => {
