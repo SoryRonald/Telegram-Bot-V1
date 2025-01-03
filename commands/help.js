@@ -11,7 +11,6 @@ module.exports = (bot) => {
             { command: '/getid', description: 'Obtenez votre ID Telegram' },
             { command: '/imgbb', description: 'Transformer une image en lien' },
             { command: '/generate <description>', description: 'Générer une image avec une description donnée' },
-            { command: '/video <titre>', description: 'Envoyer une vidéo basée sur un titre (Exemple : /video Naruto)' },
             { command: '/notify', description: 'Notifier l\'administrateur via une alerte (Seul les admins peuvent utiliser)' },
             { command: '/spotify <artiste chanson>', description: 'Envoyer une chanson via Spotify' },
             { command: '/lyrics <artiste chanson>', description: 'Obtenir les paroles d\'une chanson (Exemple : /lyrics Tiakola Meuda)' },
