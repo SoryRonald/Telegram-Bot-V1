@@ -10,6 +10,7 @@ const path = require('path');
 const axios = require('axios');
 const https = require('https');
 const youtubedl = require('youtube-dl-exec');
+const { exec } = require('child_process');
 
 const tokenPath = path.resolve(__dirname, 'account.dev.txt');
 const token = fs.readFileSync(tokenPath, 'utf-8').trim();
