@@ -1,25 +1,26 @@
-const TelegramBot = require('node-telegram-bot-api');
+module.exports = (bot) => {
+  bot.command('ban', async (ctx) => {
+    if (ctx.chat.type !== 'group' && ctx.chat.type !== 'supergroup') {
+      return ctx.reply("❌ Cette commande est uniquement disponible dans les groupes.");
+    }
 
-// Ton token et ID
-const bot = new TelegramBot('7546348683:AAECO7ClGJZfYbRnWMbSFUEs6DUuP5At9Hc', { polling: true });
-const admin_id = 7728855185;
+    const admins = await ctx.getChatAdministrators();
+    const isAdmin = admins.some((admin) => admin.user.id === ctx.from.id);
 
-bot.onText(/\/ban (@\w+)/, (msg, match) => {
-  const chatId = msg.chat.id;
-  const username = match[1];
-  const userId = msg.from.id;
+    if (!isAdmin) {
+      return ctx.reply("🚫 Seuls les administrateurs peuvent bannir des membres.");
+    }
 
-  bot.getChatMember(chatId, userId).then((member) => {
-    if (member.status === 'administrator' || member.status === 'creator') {
-      bot.getChatMember(chatId, username).then((memberToBan) => {
-        bot.kickChatMember(chatId, memberToBan.user.id).then(() => {
-          bot.sendMessage(chatId, `✅ L'utilisateur ${username} a été banni.`);
-        }).catch(() => {
-          bot.sendMessage(chatId, `❌ Impossible de bannir ${username}.`);
-        });
-      });
-    } else {
-      bot.sendMessage(chatId, "❌ Vous devez être admin pour utiliser cette commande.");
+    if (!ctx.message.reply_to_message) {
+      return ctx.reply("❌ Vous devez répondre au message d'un utilisateur pour le bannir.");
+    }
+
+    try {
+      await ctx.kickChatMember(ctx.message.reply_to_message.from.id);
+      ctx.reply(`🔨 L'utilisateur ${ctx.message.reply_to_message.from.first_name} a été banni.`);
+    } catch (error) {
+      console.error('Erreur dans la commande /ban :', error.message);
+      ctx.reply('❌ Une erreur est survenue. Assurez-vous que le bot est administrateur.');
     }
   });
-});
+};
