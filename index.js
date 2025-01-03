@@ -9,7 +9,6 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const https = require('https');
-const youtubedl = require('youtube-dl-exec');
 const { exec } = require('child_process');
 
 const tokenPath = path.resolve(__dirname, 'account.dev.txt');
@@ -45,7 +44,6 @@ require('./commands/out')(bot)
 require('./commands/generate')(bot)
 require('./commands/spotify')(bot)
 require('./commands/lyrics')(bot)
-require('./commands/video')(bot)
 require('./commands/join')(bot)
 require('./commands/notification')(bot)
 
