@@ -1,4 +1,4 @@
-module.exports = {
+ module.exports = {
     log: message => console.log(`[LOG] ${message}`),
     error: message => console.error(`[ERREUR] ${message}`),
 };
@@ -30,21 +30,11 @@ app.get('/', (req, res) => {
 
 require('./commands/ai')(bot);
 require('./commands/admin')(bot);
-require('./commands/help')(bot); // Ajout de la commande help
+require('./commands/help')(bot);
 require('./commands/translate')(bot);
 require('./commands/start')(bot);
 require('./commands/imgbb')(bot);
 require('./commands/getid')(bot);
-require('./commands/generate')(bot); // Ajout de la commande generate
-require('./commands/video')(bot); // Ajout de la commande video
-require('./commands/notify')(bot); // Ajout de la commande notify
-require('./commands/spotify')(bot); // Ajout de la commande spotify
-require('./commands/lyrics')(bot); // Ajout de la commande lyrics
-require('./commands/out')(bot); // Ajout de la commande out
-require('./commands/ban')(bot); // Ajout de la commande ban
-require('./commands/users')(bot); // Ajout de la commande users
-require('./commands/join')(bot); // Ajout de la commande join
-require('./commands/notification')(bot); // Ajout de la commande notification
 
 bot.on('text', async (ctx) => {
     const prompt = ctx.message.text;
