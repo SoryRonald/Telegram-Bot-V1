@@ -1,10 +1,21 @@
-const TelegramBot = require('node-telegram-bot-api');
+const botAdmins = [7728855185]; // Liste des administrateurs du bot
 
-// Ton token et ID
-const bot = new TelegramBot('7546348683:AAECO7ClGJZfYbRnWMbSFUEs6DUuP5At9Hc', { polling: true });
-const admin_id = 7728855185;
+module.exports = (bot) => {
+  bot.on('new_chat_members', async (ctx) => {
+    const newMembers = ctx.message.new_chat_members;
+    const botMember = newMembers.find((member) => member.id === ctx.botInfo.id);
 
-bot.on('new_chat_members', (msg) => {
-  const chatTitle = msg.chat.title || 'un chat inconnu';
-  bot.sendMessage(admin_id, `📢 Le bot a été ajouté au groupe : "${chatTitle}".`);
-});
+    if (botMember) {
+      const addedBy = ctx.from.first_name || 'Un utilisateur inconnu';
+
+      // Notification pour chaque admin du bot
+      botAdmins.forEach((adminId) => {
+        bot.telegram.sendMessage(
+          adminId,
+          `🚨 Le bot a été ajouté dans un nouveau groupe !\n\n📋 **Groupe** : ${ctx.chat.title}\n👤 **Ajouté par** : ${addedBy} (${ctx.from.id})\n\nID du groupe : ${ctx.chat.id}`,
+          { parse_mode: 'Markdown' }
+        );
+      });
+    }
+  });
+};
