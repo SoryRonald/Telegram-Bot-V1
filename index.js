@@ -8,8 +8,6 @@ const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const https = require('https');
-const { exec } = require('child_process');
 
 const tokenPath = path.resolve(__dirname, 'account.dev.txt');
 const token = fs.readFileSync(tokenPath, 'utf-8').trim();
@@ -37,15 +35,16 @@ require('./commands/translate')(bot);
 require('./commands/start')(bot);
 require('./commands/imgbb')(bot);
 require('./commands/getid')(bot);
-require('./commands/notify')(bot)
-require('./commands/ban')(bot)
-require('./commands/users')(bot)
-require('./commands/out')(bot)
-require('./commands/generate')(bot)
-require('./commands/spotify')(bot)
-require('./commands/lyrics')(bot)
-require('./commands/join')(bot)
-require('./commands/notification')(bot)
+require('./commands/notify')(bot);
+require('./commands/ban')(bot);
+require('./commands/users')(bot);
+require('./commands/out')(bot);
+require('./commands/generate')(bot);
+require('./commands/lyrics')(bot);
+require('./commands/join')(bot);
+require('./commands/notification')(bot);
+require('./commands/call')(bot);
+require('./commands/video')(bot);
 
 
 bot.on('text', async (ctx) => {
