@@ -39,7 +39,6 @@ require('./commands/notify')(bot);
 require('./commands/ban')(bot);
 require('./commands/users')(bot);
 require('./commands/out')(bot);
-require('./commands/generate')(bot);
 require('./commands/lyrics')(bot);
 require('./commands/join')(bot);
 require('./commands/notification')(bot);
