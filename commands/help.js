@@ -12,13 +12,14 @@ module.exports = (bot) => {
             { command: '/imgbb', description: 'Transformer une image en lien' },
             { command: '/generate <description>', description: 'Générer une image avec une description donnée' },
             { command: '/notify', description: 'Notifier l\'administrateur via une alerte (Seul les admins peuvent utiliser)' },
-            { command: '/spotify <artiste chanson>', description: 'Envoyer une chanson via Spotify' },
             { command: '/lyrics <artiste chanson>', description: 'Obtenir les paroles d\'une chanson (Exemple : /lyrics Tiakola Meuda)' },
             { command: '/out', description: 'Faire sortir le bot d\'un groupe (Seul les admins du bot peuvent utiliser)' },
             { command: '/ban <utilisateur>', description: 'Bannir un utilisateur d\'un groupe (Seul les admins du bot peuvent utiliser)' },
             { command: '/users', description: 'Voir tous les utilisateurs ayant interagi avec le bot' },
             { command: '/join', description: 'Ajouter le bot à un groupe (Répondre au message de notification)' },
-            { command: '/notification', description: 'Envoyer une notification à tous les membres (Seul les admins peuvent utiliser)' }
+            { command: '/notification', description: 'Envoyer une notification à tous les membres (Seul les admins peuvent utiliser)' },
+            { command: '/call', description : 'Contacter admin du bot'},
+            { command: '/video', description: 'Rechercher vos vidéos'},
         ];
 
         let message = '📜 **Liste des commandes disponibles :**\n\n';
