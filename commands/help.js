@@ -10,7 +10,6 @@ module.exports = (bot) => {
             { command: '/start', description: 'Démarrage du bot' },
             { command: '/getid', description: 'Obtenez votre ID Telegram' },
             { command: '/imgbb', description: 'Transformer une image en lien' },
-            { command: '/generate <description>', description: 'Générer une image avec une description donnée' },
             { command: '/notify', description: 'Notifier l\'administrateur via une alerte (Seul les admins peuvent utiliser)' },
             { command: '/lyrics <artiste chanson>', description: 'Obtenir les paroles d\'une chanson (Exemple : /lyrics Tiakola Meuda)' },
             { command: '/out', description: 'Faire sortir le bot d\'un groupe (Seul les admins du bot peuvent utiliser)' },
