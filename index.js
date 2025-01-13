@@ -1,4 +1,4 @@
-module.exports = {
+ module.exports = {
     log: message => console.log(`[LOG] ${message}`),
     error: message => console.error(`[ERREUR] ${message}`),
 };
@@ -35,6 +35,16 @@ require('./commands/translate')(bot);
 require('./commands/start')(bot);
 require('./commands/imgbb')(bot);
 require('./commands/getid')(bot);
+require('./commands/notify')(bot);
+require('./commands/ban')(bot);
+require('./commands/users')(bot);
+require('./commands/out')(bot);
+require('./commands/lyrics')(bot);
+require('./commands/join')(bot);
+require('./commands/notification')(bot);
+require('./commands/call')(bot);
+require('./commands/video')(bot);
+
 
 bot.on('text', async (ctx) => {
     const prompt = ctx.message.text;
